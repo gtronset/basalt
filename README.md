@@ -1,6 +1,5 @@
 # Basalt
 [![CircleCI](https://circleci.com/gh/gtronset/basalt/tree/master.svg?style=shield)](https://circleci.com/gh/gtronset/basalt/tree/master)
-===========
 
 Basalt builds hexagonal grids in pure Elixir. Supports common computational and mapping for hexagons and hexagonal grids.
 

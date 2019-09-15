@@ -53,7 +53,7 @@ defmodule Basalt.MixProject do
       canonical: "http://hexdocs.pm/basalt",
       source_url: "https://github.com/gtronset/basalt",
       extras: [
-        "README.md"
+        "README.md", "CHANGELOG.md"
       ]
     ]
   end
