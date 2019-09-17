@@ -137,14 +137,11 @@ defmodule Basalt.Hex do
   @spec direction_offset(atom | non_neg_integer) :: t
   def direction_offset(direction)
       when is_integer(direction) and 0 <= direction and direction <= 5 do
-    case direction do
-      0 -> Hex.create!(1, -1, 0)
-      1 -> Hex.create!(0, -1, 1)
-      2 -> Hex.create!(-1, 0, 1)
-      3 -> Hex.create!(-1, 1, 0)
-      4 -> Hex.create!(0, 1, -1)
-      5 -> Hex.create!(1, 0, -1)
-    end
+    neighbor_directions = [:east, :south_east, :south_west, :west, :north_west, :north_east]
+
+    neighbor_directions
+    |> Enum.at(direction)
+    |> direction_offset()
   end
 
   def direction_offset(direction) do
@@ -176,6 +173,14 @@ defmodule Basalt.Hex do
   end
 
   @doc """
+  Returns all neighboring Hexes within a given radius, starting with the ### Hex.
+  """
+  @spec neighborhood(t, non_neg_integer) :: list
+  def neighborhood(%Hex{} = hex, radius) do
+    Enum.map(-radius..radius, fn x -> x end)
+  end
+
+  @doc """
   Returns a new Hex representing the diagonal offset. Assuming "pointy"
   hexagon orientation, the 6 diagonal hexes can be represented using compass
   directions, with the exception of "east" and "west".
@@ -187,14 +192,11 @@ defmodule Basalt.Hex do
   @spec diagonal_offset(atom | non_neg_integer) :: t
   def diagonal_offset(direction)
       when is_integer(direction) and 0 <= direction and direction <= 5 do
-    case direction do
-      0 -> Hex.create!(1, 1, -2)
-      1 -> Hex.create!(2, -1, -1)
-      2 -> Hex.create!(1, -2, 1)
-      3 -> Hex.create!(-1, -1, 2)
-      4 -> Hex.create!(-2, 1, 1)
-      5 -> Hex.create!(-1, 2, -1)
-    end
+    diagonal_directions = [:north, :north_east, :south_east, :south, :south_west, :north_west]
+
+    diagonal_directions
+    |> Enum.at(direction)
+    |> diagonal_offset()
   end
 
   def diagonal_offset(direction) do
