@@ -175,6 +175,34 @@ defmodule BasaltTest do
     end
   end
 
+  describe "Hex.neighborhood/2" do
+    test "returns all neighbors within a certain range" do
+      hex_a = Hex.create!(1, -1, 0)
+
+      assert Hex.neighborhood(hex_a, 2) == [
+               %Hex{q: 3, r: -3, s: 0},
+               %Hex{q: 3, r: -2, s: -1},
+               %Hex{q: 3, r: -1, s: -2},
+               %Hex{q: 2, r: -3, s: 1},
+               %Hex{q: 2, r: -2, s: 0},
+               %Hex{q: 2, r: -1, s: -1},
+               %Hex{q: 2, r: 0, s: -2},
+               %Hex{q: 1, r: -3, s: 2},
+               %Hex{q: 1, r: -2, s: 1},
+               %Hex{q: 1, r: -1, s: 0},
+               %Hex{q: 1, r: 0, s: -1},
+               %Hex{q: 1, r: 1, s: -2},
+               %Hex{q: 0, r: -2, s: 2},
+               %Hex{q: 0, r: -1, s: 1},
+               %Hex{q: 0, r: 0, s: 0},
+               %Hex{q: 0, r: 1, s: -1},
+               %Hex{q: -1, r: -1, s: 2},
+               %Hex{q: -1, r: 0, s: 1},
+               %Hex{q: -1, r: 1, s: 0}
+             ]
+    end
+  end
+
   describe "Hex.equal?/2" do
     test "returns true when two hexes are equal" do
       hex_a = Hex.create!(0, 1, -1)

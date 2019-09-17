@@ -173,11 +173,16 @@ defmodule Basalt.Hex do
   end
 
   @doc """
-  Returns all neighboring Hexes within a given radius, starting with the ### Hex.
+  Returns all neighboring Hexes within a given radius, starting with the outermost "East" Hex.
   """
   @spec neighborhood(t, non_neg_integer) :: list
   def neighborhood(%Hex{} = hex, radius) do
-    Enum.map(-radius..radius, fn x -> x end)
+    radius_range = radius..-radius
+
+    for dq <- radius_range,
+        dr <- Enum.max([-radius, -dq - radius])..Enum.min([radius, -dq + radius]) do
+      Hex.add(hex, Hex.create!(dq, dr, -dq - dr))
+    end
   end
 
   @doc """
