@@ -180,6 +180,14 @@ defmodule Basalt.Hex do
   end
 
   @doc """
+  Returns a boolean if the two Hexes are immediate neighbor Hexes.
+  """
+  @spec neighbor?(t, t) :: boolean
+  def neighbor?(%Hex{} = hex_a, %Hex{} = hex_b) do
+    Hex.length(subtract(hex_a, hex_b)) == 1
+  end
+
+  @doc """
   Returns all neighboring Hexes within a given radius, starting with the outermost
   "East" `q` Hex-line, working descending through the `r` Hex-line.
   """

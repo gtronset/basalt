@@ -110,6 +110,28 @@ defmodule BasaltTest do
     end
   end
 
+  describe "Hex.neighbor?/2" do
+    test "returns true when two hexes are immediate neighbors" do
+      hex_a = Hex.create!(1, 1, -2)
+      hex_b = Hex.create!(2, 0, -2)
+      hex_c = Hex.create!(1, 0, -1)
+      hex_d = Hex.create!(0, 1, -1)
+
+      assert Hex.neighbor?(hex_a, hex_b)
+      assert Hex.neighbor?(hex_a, hex_c)
+      assert Hex.neighbor?(hex_a, hex_d)
+    end
+
+    test "returns false when two hexes are NOT immediate neighbors" do
+      hex_a = Hex.create!(1, 1, -2)
+      hex_b = Hex.create!(-4, 0, 4)
+      hex_c = Hex.create!(3, -2, -1)
+
+      assert not Hex.neighbor?(hex_a, hex_b)
+      assert not Hex.neighbor?(hex_a, hex_c)
+    end
+  end
+
   describe "Hex.neighbors/1" do
     test "returns all immediate neighbors" do
       hex_a = Hex.create!(1, 1, -2)
