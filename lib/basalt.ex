@@ -165,7 +165,7 @@ defmodule Basalt.Hex do
   end
 
   @doc """
-  Returns all neighboring Hexes, starting with the "eastern" Hex.
+  Returns all neighboring Hexes, starting with the "eastern" Hex and rotating clockwise.
   """
   @spec neighbors(t) :: list
   def neighbors(%Hex{} = hex) do
@@ -173,7 +173,8 @@ defmodule Basalt.Hex do
   end
 
   @doc """
-  Returns all neighboring Hexes within a given radius, starting with the outermost "East" Hex.
+  Returns all neighboring Hexes within a given radius, starting with the outermost
+  "East" `q` Hex-line, working descending through the `r` Hex-line.
   """
   @spec neighborhood(t, non_neg_integer) :: list
   def neighborhood(%Hex{} = hex, radius) do
