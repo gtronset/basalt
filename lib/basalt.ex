@@ -137,7 +137,14 @@ defmodule Basalt.Hex do
   @spec direction_offset(atom | non_neg_integer) :: t
   def direction_offset(direction)
       when is_integer(direction) and 0 <= direction and direction <= 5 do
-    neighbor_directions = [:east, :south_east, :south_west, :west, :north_west, :north_east]
+    neighbor_directions = [
+      :east,
+      :south_east,
+      :south_west,
+      :west,
+      :north_west,
+      :north_east
+    ]
 
     neighbor_directions
     |> Enum.at(direction)
@@ -181,7 +188,8 @@ defmodule Basalt.Hex do
     radius_range = radius..-radius
 
     for dq <- radius_range,
-        dr <- Enum.max([-radius, -dq - radius])..Enum.min([radius, -dq + radius]) do
+        dr <-
+          Enum.max([-radius, -dq - radius])..Enum.min([radius, -dq + radius]) do
       Hex.add(hex, Hex.create!(dq, dr, -dq - dr))
     end
   end
@@ -198,7 +206,14 @@ defmodule Basalt.Hex do
   @spec diagonal_offset(atom | non_neg_integer) :: t
   def diagonal_offset(direction)
       when is_integer(direction) and 0 <= direction and direction <= 5 do
-    diagonal_directions = [:north, :north_east, :south_east, :south, :south_west, :north_west]
+    diagonal_directions = [
+      :north,
+      :north_east,
+      :south_east,
+      :south,
+      :south_west,
+      :north_west
+    ]
 
     diagonal_directions
     |> Enum.at(direction)
