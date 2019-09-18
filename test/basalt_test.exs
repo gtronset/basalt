@@ -58,11 +58,11 @@ defmodule BasaltTest do
     end
   end
 
-  describe "Hex.length/2" do
-    test "returns the length of a hex" do
+  describe "Hex.distance/1" do
+    test "returns the distance of a hex from origin" do
       hex_a = Hex.create!(1, 1, -2)
 
-      assert Hex.length(hex_a) == 2
+      assert Hex.distance(hex_a) == 2
     end
   end
 

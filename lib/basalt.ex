@@ -104,6 +104,17 @@ defmodule Basalt.Hex do
   end
 
   @doc """
+  The distance ("length") between a given Hex and the hexagonal grid's
+  origin.
+
+  Returns an integer representing the tile "steps" from origin.
+  """
+  @spec distance(t) :: integer
+  def distance(%Hex{} = hex) do
+    round((abs(hex.q) + abs(hex.r) + abs(hex.s)) / 2)
+  end
+
+  @doc """
   The distance between two hexes is the "length" between the two
   hexes.
 
@@ -111,18 +122,7 @@ defmodule Basalt.Hex do
   """
   @spec distance(t, t) :: non_neg_integer
   def distance(%Hex{} = a, %Hex{} = b) do
-    Hex.length(subtract(a, b))
-  end
-
-  @doc """
-  "Length" represents the tile distance between a given Hex and the
-  hexagonal grid's origin.
-
-  Returns an integer representing the tile "steps" from origin.
-  """
-  @spec length(t) :: non_neg_integer
-  def length(%Hex{} = hex) do
-    round((abs(hex.q) + abs(hex.r) + abs(hex.s)) / 2)
+    Hex.distance(subtract(a, b))
   end
 
   @doc """
@@ -184,7 +184,7 @@ defmodule Basalt.Hex do
   """
   @spec neighbor?(t, t) :: boolean
   def neighbor?(%Hex{} = hex_a, %Hex{} = hex_b) do
-    Hex.length(subtract(hex_a, hex_b)) == 1
+    distance(hex_a, hex_b) == 1
   end
 
   @doc """
